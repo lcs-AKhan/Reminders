@@ -71,6 +71,7 @@
 			children = (
 				B8B2F4A72799C2D600A47B4B /* RemindersApp.swift */,
 				B8B2F4C62799C2FE00A47B4B /* Model */,
+				B8B2F4D62799FC3900A47B4B /* ViewModel */,
 				B8B2F4C52799C2F900A47B4B /* Views */,
 				B8B2F4A92799C2D900A47B4B /* Assets.xcassets */,
 			);
@@ -109,9 +110,16 @@
 			children = (
 				B8B2F4C72799C39400A47B4B /* Task.swift */,
 				B8B2F4C92799C3F700A47B4B /* TaskPriority.swift */,
-				B8B2F4CB2799C44F00A47B4B /* TaskStore.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B8B2F4D62799FC3900A47B4B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B8B2F4CB2799C44F00A47B4B /* TaskStore.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
