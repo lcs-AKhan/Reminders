@@ -32,7 +32,7 @@ struct TaskCell: View {
                 }
             Text(task.description)
         }
-        .foregroundColor(self.task)
+        .foregroundColor(taskColor)
     }
 }
 
