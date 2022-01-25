@@ -13,6 +13,8 @@ struct ContentView: View {
     
     @State private var showingAddTask = false
     
+    @State var showingCompletedTasks = true
+    
     var body: some View {
         List {
             ForEach(store.tasks) { task in
@@ -31,6 +33,15 @@ struct ContentView: View {
             
             ToolbarItem(placement: .navigationBarLeading) {
                 EditButton()
+            }
+            
+            ToolbarItem(placement: .bottomBar) {
+                // toggle visibility of tasks
+                Button(showingCompletedTasks ? "Hide completed tasks" : "Show completed tasks") {
+                    print("Value of showingCompletedTasks was: \(showingCompletedTasks)")
+                    showingCompletedTasks.toggle()
+                    print("Value of showingCompletedTasks is: \(showingCompletedTasks)")
+                }
             }
         }
         .sheet(isPresented: $showingAddTask) {
