@@ -15,17 +15,22 @@ struct ContentView: View {
     
     @State var showingCompletedTasks = true
     
+    @State var listShouldUpdate = false
+    
     var body: some View {
+        
+        let _ = print("listShouldUpdate has been toggled. Current value is \(listShouldUpdate)")
+        
         List {
             ForEach(store.tasks) { task in
                 
                 if showingCompletedTasks {
-                    TaskCell(task: task)
+                    TaskCell(task: task, triggerListUpdate: .constant(true))
                 } else {
                     
                     // only show incomplete tasks
                     if task.completed == false {
-                        TaskCell(task: task)
+                        TaskCell(task: task, triggerListUpdate: $listShouldUpdate)
                     }
                     
                 }
