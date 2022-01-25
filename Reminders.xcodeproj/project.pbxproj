@@ -72,6 +72,7 @@
 				B8B2F4A72799C2D600A47B4B /* RemindersApp.swift */,
 				B8B2F4C62799C2FE00A47B4B /* Model */,
 				B8B2F4D62799FC3900A47B4B /* ViewModel */,
+				B8D79DF927A0373F0089CFD4 /* ViewModels */,
 				B8B2F4C52799C2F900A47B4B /* Views */,
 				B8B2F4A92799C2D900A47B4B /* Assets.xcassets */,
 			);
@@ -120,6 +121,13 @@
 				B8B2F4CB2799C44F00A47B4B /* TaskStore.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B8D79DF927A0373F0089CFD4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
