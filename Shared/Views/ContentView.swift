@@ -19,6 +19,7 @@ struct ContentView: View {
                 TaskCell(task: task)
             }
             .onDelete(perform: store.deleteItems)
+            .onMove(perform: store.moveItems)
         }
         .navigationTitle("Reminders")
         .toolbar {
@@ -26,6 +27,10 @@ struct ContentView: View {
                 Button("Add") {
                     showingAddTask = true
                 }
+            }
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                EditButton()
             }
         }
         .sheet(isPresented: $showingAddTask) {

@@ -24,6 +24,10 @@ class TaskStore: ObservableObject {
         // the "tasks" array which handles removal from the array
         tasks.remove(atOffsets: offsets)
     }
+    
+    func moveItems(from source: IndexSet, to destination: Int) {
+        tasks.move(fromOffsets: source, toOffset: destination)
+    }
 }
 
 let testStore = TaskStore(tasks: testData)
