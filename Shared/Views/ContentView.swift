@@ -17,27 +17,50 @@ struct ContentView: View {
     
     @State var listShouldUpdate = false
     
+    @State private var selectedPriorityForVisibleTasks: VisibleTaskPriority = .all
+    
     var body: some View {
         
         let _ = print("listShouldUpdate has been toggled. Current value is \(listShouldUpdate)")
-        
-        List {
-            ForEach(store.tasks) { task in
-                
-                if showingCompletedTasks {
-                    TaskCell(task: task, triggerListUpdate: .constant(true))
-                } else {
+
+        VStack {
+            
+            Text("Filter by...")
+                .font(Font.caption.smallCaps())
+                .foregroundColor(.secondary)
+            
+            Picker("Priority", selection: $selectedPriorityForVisibleTasks) {
+                Text(VisibleTaskPriority.all.rawValue)
+                    .tag(VisibleTaskPriority.all)
+                Text(VisibleTaskPriority.low.rawValue)
+                    .tag(VisibleTaskPriority.low)
+                Text(VisibleTaskPriority.medium.rawValue)
+                    .tag(VisibleTaskPriority.medium)
+                Text(VisibleTaskPriority.high.rawValue)
+                    .tag(VisibleTaskPriority.high)
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+            
+            List {
+                ForEach(store.tasks) { task in
                     
-                    // only show incomplete tasks
-                    if task.completed == false {
-                        TaskCell(task: task, triggerListUpdate: $listShouldUpdate)
+                    if showingCompletedTasks {
+                        TaskCell(task: task, triggerListUpdate: .constant(true))
+                    } else {
+                        
+                        // only show incomplete tasks
+                        if task.completed == false {
+                            TaskCell(task: task, triggerListUpdate: $listShouldUpdate)
+                        }
+                        
                     }
                     
                 }
-                
+                .onDelete(perform: store.deleteItems)
+                .onMove(perform: store.moveItems)
             }
-            .onDelete(perform: store.deleteItems)
-            .onMove(perform: store.moveItems)
+
         }
         .navigationTitle("Reminders")
         .toolbar {
