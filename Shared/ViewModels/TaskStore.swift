@@ -23,7 +23,7 @@ class TaskStore: ObservableObject {
         do {
             let data = try Data(contentsOf: filename)
             
-            print(String(data: data, encoding: .utf8))
+            print(String(data: data, encoding: .utf8)!)
             
             self.tasks = try JSONDecoder().decode([Task].self, from: data)
         } catch {

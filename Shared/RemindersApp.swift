@@ -16,8 +16,22 @@ struct RemindersApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ContentView(store: store)
+            
+            TabView {
+                NavigationView {
+                    ContentView(store: store)
+                }
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text("List")
+                }
+                NavigationView {
+                    Important(store: store)
+                }
+                .tabItem {
+                    Image(systemName: "exclamationmark")
+                    Text("Important")
+                }
             }
         }
         .onChange(of: scenePhase) { newPhase in

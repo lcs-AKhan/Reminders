@@ -57,5 +57,5 @@ class Task: Identifiable, ObservableObject, Codable {
 let testData = [
     Task(description: "Grow long hair", priority: .high, completed: true),
     Task(description: "Get modelling contract", priority: .medium, completed: false),
-    Task(description: "Reture from teaching", priority: .low, completed: false),
+    Task(description: "Retire from teaching", priority: .low, completed: false),
 ]
