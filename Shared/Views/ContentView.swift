@@ -46,12 +46,23 @@ struct ContentView: View {
                 ForEach(store.tasks) { task in
                     
                     if showingCompletedTasks {
-                        TaskCell(task: task, triggerListUpdate: .constant(true))
+                        
+                        if selectedPriorityForVisibleTasks == .all {
+                            TaskCell(task: task, triggerListUpdate: .constant(true))
+                        } else {
+                            if task.priority.rawValue == selectedPriorityForVisibleTasks.rawValue {
+                                TaskCell(task: task, triggerListUpdate: .constant(true))
+                            }
+                        }
+                        
                     } else {
                         
                         // only show incomplete tasks
                         if task.completed == false {
-                            TaskCell(task: task, triggerListUpdate: $listShouldUpdate)
+                            
+                            if selectedPriorityForVisibleTasks == .all {
+                                TaskCell(task: task, triggerListUpdate: $listShouldUpdate)
+                            }
                         }
                         
                     }
