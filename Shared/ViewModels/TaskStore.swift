@@ -14,7 +14,23 @@ class TaskStore: ObservableObject {
     
     // MARK: Initializers
     init(tasks: [Task] = []) {
-        self.tasks = tasks
+        
+        let filename = getDocumentsDirectory().appendingPathComponent(savedTasksLabel)
+        print(filename)
+        
+        
+        // Attempt to load from the JSON in the stored/persisted file
+        do {
+            let data = try Data(contentsOf: filename)
+            
+            print(String(data: data, encoding: .utf8))
+            
+            self.tasks = try JSONDecoder().decode([Task].self, from: data)
+        } catch {
+            print(error.localizedDescription)
+            
+            self.tasks = tasks
+        }
     }
     
     // MARK: Functions
@@ -27,6 +43,29 @@ class TaskStore: ObservableObject {
     
     func moveItems(from source: IndexSet, to destination: Int) {
         tasks.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    // Persist the list of tasks
+    func persistTasks() {
+        
+        // Get a URL that points to the saved JSON data containing our list of tasks
+        let filename = getDocumentsDirectory().appendingPathComponent(savedTasksLabel)
+        
+        // Try to encode into our people array to JSON
+        do {
+            let encoder = JSONEncoder()
+            
+            encoder.outputFormatting = .prettyPrinted
+            
+            let data = try encoder.encode(self.tasks)
+            
+            try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
+            
+            print("Saved data to documents directory successfully")
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
